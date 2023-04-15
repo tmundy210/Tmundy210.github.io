@@ -1,6 +1,6 @@
 import { graphql } from 'gatsby'
 import React from 'react'
-
+import parse from 'html-react-parser'
 
 
 /*const pageTemplate = props =>{
@@ -22,18 +22,20 @@ import React from 'react'
         )}*/
 
        export default function Product({ pageContext })  {
-            const { data } = pageContext
-            console.log(data)
+            //
+            //const { data } = pageContext
+            //const { data } = pageContext
+            console.log(pageContext.title)
             console.log("hello")
-            //const htmlString = data.recipeInstruction.processed
-            //const parser = new DOMParser();
-            //const html = parser.parseFromString(htmlString, 'text/html');
             return (
               <div>
-                <h2>{data.title}</h2>
-                
-                
+
+                <h2>{pageContext.title}</h2>
+                <h2>{pageContext.time}</h2>
+                {pageContext.instructions.processed}
+                <h2>{pageContext.instructions2}</h2>
               </div>
+
             )
           }
 

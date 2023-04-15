@@ -41,12 +41,16 @@ exports.createPages = async ({ graphql,actions }) => {
   //console.log(result.data.Drupal.nodeRecipes.edges)
   
   result.data.Drupal.nodeRecipes.edges.forEach(edges => {
-    console.log(edges.node.recipeInstruction.processed)
+    console.log(edges.node.recipeInstruction)
+    console.log('___________________________________________________________________')
     createPage({
       path: `${edges.node.path}`,
       component: template,
       context: {
-        data: edges.node,
+        title: edges.node.title,
+        time: edges.node.cookingTime,
+        instrcutions: edges.node.recipeInstruction,
+        instrcutions2: edges.node.recipeInstruction.processed
       },
     })
   });
