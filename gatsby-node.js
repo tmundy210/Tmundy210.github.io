@@ -19,10 +19,19 @@ exports.createPages = async ({ graphql,actions }) => {
             path
             status
             title
+            numberOfServings
+            preparationTime
             recipeInstruction {
               format
               processed
               value
+            }
+            mediaImage {
+              mediaImage {
+                height
+                url
+                width
+              }
             }
           }
         }
@@ -41,7 +50,8 @@ exports.createPages = async ({ graphql,actions }) => {
   //console.log(result.data.Drupal.nodeRecipes.edges)
   
   result.data.Drupal.nodeRecipes.edges.forEach(edges => {
-    console.log(edges.node.recipeInstruction)
+    console.log(edges.node.id)
+    console.log(edges.node.mediaImage.mediaImage.url)
     console.log('___________________________________________________________________')
     createPage({
       path: `${edges.node.path}`,
@@ -49,8 +59,11 @@ exports.createPages = async ({ graphql,actions }) => {
       context: {
         title: edges.node.title,
         time: edges.node.cookingTime,
-        instrcutions: edges.node.recipeInstruction,
-        instrcutions2: edges.node.recipeInstruction.processed
+        instructions: edges.node.recipeInstruction.processed,
+        servings: edges.node.numberOfServings,
+        prep: edges.node.preparationTime,
+        id: edges.node.id,
+        url: edges.node.mediaImage.mediaImage.url + ""
       },
     })
   });
