@@ -63,7 +63,8 @@ exports.createPages = async ({ graphql,actions }) => {
         servings: edges.node.numberOfServings,
         prep: edges.node.preparationTime,
         id: edges.node.id,
-        url: edges.node.mediaImage.mediaImage.url + ""
+        url: edges.node.mediaImage.mediaImage.url + "",
+        edge: edges
       },
     })
   });
