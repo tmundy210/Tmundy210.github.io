@@ -2,7 +2,7 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 module.exports = {
-  pathPrefix: "/src/pages",
+  pathPrefix: "/src",
   siteMetadata: {
     title: `My Gatsby Site`,
     siteUrl: `https://www.Tmundy210.github.io`
