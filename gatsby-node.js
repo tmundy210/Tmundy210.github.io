@@ -5,6 +5,7 @@ const { Component } = require("react")
 exports.createPages = async ({ graphql,actions }) => {
   const { createPage } = actions
   const template = path.resolve(`src/pages/recipe.js`)
+  const articleTemplate = path.resolve(`src/pages/articles.js`)
   const recipeTOC = path.resolve(`src/pages/recipeContents.js`)
   
   // Query for markdown nodes to use in creating pages.
@@ -37,6 +38,24 @@ exports.createPages = async ({ graphql,actions }) => {
           }
         }
       }
+      nodeArticles(first: 10) {
+        edges {
+          node {
+            body {
+              processed
+              format
+              value
+            }
+            path
+            title
+            mediaImage {
+              mediaImage {
+                url
+              }
+            }
+          }
+        }
+      }
     }
     
   }`
@@ -64,6 +83,19 @@ exports.createPages = async ({ graphql,actions }) => {
         servings: edges.node.numberOfServings,
         prep: edges.node.preparationTime,
         id: edges.node.id,
+        url: edges.node.mediaImage.mediaImage.url + "",
+        edge: edges
+      },
+    })
+  })
+  result.data.Drupal.nodeArticles.edges.forEach(edges => {
+    //arr.push(edges.node.path)
+    createPage({
+      path: `${edges.node.path}`,
+      component: articleTemplate,
+      context: {
+        title: edges.node.title,
+        body: edges.node.body.processed,
         url: edges.node.mediaImage.mediaImage.url + "",
         edge: edges
       },

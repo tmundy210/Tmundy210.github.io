@@ -9,7 +9,7 @@ import Seo from '../componets/seo'
 const IndexPage = () => {
   return (
       <Layout pageTitle="Home Page">
-      <p>I'm making this by following the Gatsby Tutorial.</p>
+      <p>Welcome to my website! Enjoy your stay.</p>
       <StaticImage
         alt="Not Clifford, just some angry pink blob"
         src="../images/Kirby.jpg"

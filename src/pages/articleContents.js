@@ -16,11 +16,11 @@ import {
 } from '../componets/recipeLayout.module.css'
 //const rLinks = 
 
-const RecipePage = ({}) => {
+const ArticlePage = ({}) => {
   //var pageInfo = data
   const data = useStaticQuery(graphql`
     query  {
-      allSitePage(limit: 10) {
+      allSitePage(skip: 10, limit: 8) {
         edges {
           node {
             path
@@ -31,7 +31,7 @@ const RecipePage = ({}) => {
     }
   `)
     return (
-      <Layout pageTitle="Recipes">
+      <Layout pageTitle="Articles">
       <ul>
         {
             data.allSitePage.edges.map(node => (
@@ -51,21 +51,7 @@ const RecipePage = ({}) => {
     )
   }
   
-  /*export const query = graphql`
-  query {
-    allSitePage(limit: 10) {
-      edges {
-        node {
-          path
-          id
-        }
-      }
-    }
-  }
-  `*/
-
-  // You'll learn about this in the next task, just copy it for now
-  export const Head = () => <Seo title= "Recipes"/>
+  export const Head = () => <Seo title= "Articles"/>
   
   // Step 3: Export your component
-  export default RecipePage
+  export default ArticlePage
