@@ -2,10 +2,10 @@ require("dotenv").config({
   path: `.env.${process.env.NODE_ENV}`,
 })
 module.exports = {
-  pathPrefix: "/MySite/pages",
+  pathPrefix: "/src",
   siteMetadata: {
     title: `My Gatsby Site`,
-    siteUrl: `https://www.Tmundy210.com`
+    siteUrl: `https://www.Tmundy210.github.io`
   },
   plugins: ["gatsby-plugin-image","gatsby-plugin-sharp",
     {

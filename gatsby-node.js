@@ -5,7 +5,8 @@ const { Component } = require("react")
 exports.createPages = async ({ graphql,actions }) => {
   const { createPage } = actions
   const template = path.resolve(`src/pages/recipe.js`)
-
+  const recipeTOC = path.resolve(`src/pages/recipeContents.js`)
+  
   // Query for markdown nodes to use in creating pages.
   const result = await graphql(`
   query MyQuery {
@@ -37,21 +38,21 @@ exports.createPages = async ({ graphql,actions }) => {
         }
       }
     }
+    
   }`
   
   )
- 
+
   // Handle errors
   if (result.errors) {
     reporter.panicOnBuild(`Error while running GraphQL query.`)
     return
   }
 
-  //console.log(result.data.Drupal.nodeRecipes.edges)
+  console.log(result.data.Drupal.nodeRecipes.edges)
   
   result.data.Drupal.nodeRecipes.edges.forEach(edges => {
-    console.log(edges.node.id)
-    console.log(edges.node.mediaImage.mediaImage.url)
+    //arr.push(edges.node.path)
     console.log('___________________________________________________________________')
     createPage({
       path: `${edges.node.path}`,
@@ -67,8 +68,31 @@ exports.createPages = async ({ graphql,actions }) => {
         edge: edges
       },
     })
+  })
+  createPage({
+    path: `/recipeContents`,
+    component: recipeTOC,
+    context: {
+      edges:result.data.Drupal.nodeRecipes.edges
+    },
   });
-  
+
+ 
+
+
+
+
+ /* createPage({
+    path: '/recipeContents',
+    component: recipeTOC,
+    context: {
+      toc: arr[1]
+    },
+  })
+*/
+
+
+
   /*result.nodeRecipes.edges.forEach(element => {/////////
     console.log(element)
   });*/
