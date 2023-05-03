@@ -30,12 +30,6 @@ const RecipePage = ({}) => {
       }
     }
   `)
-  data.allSitePage.edges.map(node =>(
-    console.log(node.node.pageContext.title)
-  ))
-  //<div class={grid3}>
-  //<div class={gridItem}>Prep Time:<br></br>{recipeData.prep} Minutes</div>
-  //console.log(data.allSitePage.edges.map(node =>(node.path)))
     return (
       <Layout pageTitle="Recipes">
       <ul>
